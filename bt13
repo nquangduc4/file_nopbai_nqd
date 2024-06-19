@@ -1,0 +1,42 @@
+using System;
+using System.Text;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Thiết lập mã hóa để hiển thị tiếng Việt
+        Console.OutputEncoding = Encoding.UTF8;
+
+        // Khai báo biến số nguyên 1 byte không dấu
+        byte n;
+        
+        // Gọi hàm để nhập giá trị của n
+        n = NhapSoNguyenKhongDau();
+        
+        // In ra giá trị được nhập
+        Console.WriteLine($"Giá trị n đã nhập: {n}");
+    }
+
+    // Hàm static để đọc số nguyên 1 byte không dấu từ bàn phím, nằm trong khoảng từ 2 đến 10
+    static byte NhapSoNguyenKhongDau()
+    {
+        byte result;
+        bool isValid;
+
+        do
+        {
+            Console.Write("Nhập một số nguyên 1 byte không dấu (từ 2 đến 10): ");
+            string input = Console.ReadLine();
+            isValid = byte.TryParse(input, out result) && result >= 2 && result <= 10;
+
+            if (!isValid)
+            {
+                Console.WriteLine("Giá trị không hợp lệ. Vui lòng nhập lại.");
+            }
+        }
+        while (!isValid);
+
+        return result;
+    }
+}
