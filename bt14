@@ -1,0 +1,42 @@
+using System;
+using System.Text;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Thiết lập mã hóa để hiển thị tiếng Việt
+        Console.OutputEncoding = Encoding.UTF8;
+
+        // Khai báo biến số thực 4 byte
+        float x;
+        
+        // Gọi hàm để nhập giá trị của x
+        x = NhapSoThuc();
+        
+        // In ra giá trị được nhập
+        Console.WriteLine($"Giá trị x đã nhập: {x}");
+    }
+
+    // Hàm static để đọc số thực 4 byte từ bàn phím
+    static float NhapSoThuc()
+    {
+        float result;
+        bool isValid;
+
+        do
+        {
+            Console.Write("Nhập một số thực 4 byte: ");
+            string input = Console.ReadLine();
+            isValid = float.TryParse(input, out result);
+
+            if (!isValid)
+            {
+                Console.WriteLine("Giá trị không hợp lệ. Vui lòng nhập lại.");
+            }
+        }
+        while (!isValid);
+
+        return result;
+    }
+}
