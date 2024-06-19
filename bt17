@@ -1,0 +1,34 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Đặt mã hóa đầu ra console để hiển thị tiếng Việt
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+        // Nhập chuỗi từ bàn phím
+        Console.Write("Nhập chuỗi (nhập '#' để phát tiếng beep): ");
+        string st = Console.ReadLine().Trim(); // Trim để loại bỏ khoảng trắng thừa ở đầu và cuối chuỗi
+
+        // Kiểm tra nếu chuỗi là "#"
+        if (st == "#")
+        {
+            Console.Beep(); // Phát tiếng beep
+        }
+        else
+        {
+            // Gọi hàm để đếm số từ của chuỗi và in ra màn hình
+            int wordCount = CountWords(st);
+            Console.WriteLine($"Số từ của chuỗi '{st}' là: {wordCount}");
+        }
+    }
+
+    static int CountWords(string str)
+    {
+        // Sử dụng phương thức Split để tách chuỗi thành các từ
+        // Sử dụng StringSplitOptions.RemoveEmptyEntries để loại bỏ các chuỗi rỗng
+        string[] words = str.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        return words.Length;
+    }
+}
