@@ -1,0 +1,39 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Đặt mã hóa đầu ra console để hiển thị tiếng Việt
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+        // Nhập số thực 8 byte từ bàn phím
+        double x = ReadDouble();
+
+        // Tính căn bậc hai của x và hiển thị kết quả
+        if (x >= 0)
+        {
+            double squareRoot = Math.Sqrt(x);
+            Console.WriteLine($"Căn bậc hai của {x} là: {squareRoot}");
+        }
+        else
+        {
+            Console.WriteLine($"Không thể tính căn bậc hai của số âm {x}.");
+        }
+    }
+
+    static double ReadDouble()
+    {
+        double result;
+        while (true)
+        {
+            Console.Write("Nhập số thực (double): ");
+            if (double.TryParse(Console.ReadLine(), out result))
+            {
+                break;
+            }
+            Console.WriteLine("Giá trị nhập vào không hợp lệ. Vui lòng thử lại.");
+        }
+        return result;
+    }
+}
