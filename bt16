@@ -1,0 +1,101 @@
+using System;
+using System.Text;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Đặt mã hóa đầu ra console để hiển thị tiếng Việt
+        Console.OutputEncoding = Encoding.UTF8;
+        
+        // Khai báo và nhập giá trị cho m và n
+        byte m = ReadByteInRange(2, 10);
+        byte n = ReadByteInRange(2, 10);
+        Console.WriteLine($"Giá trị của m: {m}");
+        Console.WriteLine($"Giá trị của n: {n}");
+        
+        // Khai báo và cấp phát mảng 2 chiều số nguyên 4 byte a
+        int[,] a = new int[m, n];
+        
+        // Nhập giá trị các phần tử của mảng a từ bàn phím
+        ReadIntArray(a);
+        
+        // In ra màn hình giá trị của mảng a
+        Console.WriteLine("Giá trị của mảng a:");
+        PrintIntArray(a);
+        
+        // Tính tổng các phần tử của mảng chia hết cho 2024
+        int sum = SumDivisibleBy(a, 2024);
+        Console.WriteLine($"Tổng các phần tử của mảng chia hết cho 2024 là: {sum}");
+    }
+
+    static byte ReadByteInRange(byte min, byte max)
+    {
+        byte result;
+        while (true)
+        {
+            Console.Write($"Nhập số nguyên trong khoảng từ {min} đến {max}: ");
+            if (byte.TryParse(Console.ReadLine(), out result) && result >= min && result <= max)
+            {
+                break;
+            }
+            Console.WriteLine("Giá trị nhập vào không hợp lệ. Vui lòng thử lại.");
+        }
+        return result;
+    }
+
+    static int ReadInt()
+    {
+        int result;
+        while (true)
+        {
+            Console.Write("Nhập số nguyên: ");
+            if (int.TryParse(Console.ReadLine(), out result))
+            {
+                break;
+            }
+            Console.WriteLine("Giá trị nhập vào không hợp lệ. Vui lòng thử lại.");
+        }
+        return result;
+    }
+
+    static void ReadIntArray(int[,] array)
+    {
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                Console.Write($"Nhập giá trị cho phần tử [{i}, {j}]: ");
+                array[i, j] = ReadInt();
+            }
+        }
+    }
+
+    static void PrintIntArray(int[,] array)
+    {
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                Console.Write($"{array[i, j]} ");
+            }
+            Console.WriteLine();
+        }
+    }
+
+    static int SumDivisibleBy(int[,] array, int p)
+    {
+        int sum = 0;
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                if (array[i, j] % p == 0)
+                {
+                    sum += array[i, j];
+                }
+            }
+        }
+        return sum;
+    }
+}
