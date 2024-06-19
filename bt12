@@ -1,0 +1,60 @@
+using System;
+using System.Text;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Thiết lập mã hóa để hiển thị tiếng Việt
+        Console.OutputEncoding = Encoding.UTF8;
+
+        // Khai báo biến số nguyên 2 byte không dấu
+        ushort n;
+        
+        // Gọi hàm để nhập giá trị của n
+        n = NhapSoNguyenKhongDau();
+        
+        // In ra giá trị được nhập
+        Console.WriteLine($"Giá trị n đã nhập: {n}");
+        
+        // Tính tổng bình phương các số từ 1 đến n
+        long tongBinhPhuong = TinhTongBinhPhuong(n);
+        
+        // In ra giá trị tính được
+        Console.WriteLine($"Tổng bình phương các số từ 1 đến {n} là: {tongBinhPhuong}");
+    }
+
+    // Hàm static để đọc số nguyên 2 byte không dấu từ bàn phím
+    static ushort NhapSoNguyenKhongDau()
+    {
+        ushort result;
+        bool isValid;
+
+        do
+        {
+            Console.Write("Nhập một số nguyên 2 byte không dấu: ");
+            string input = Console.ReadLine();
+            isValid = ushort.TryParse(input, out result);
+
+            if (!isValid)
+            {
+                Console.WriteLine("Giá trị không hợp lệ. Vui lòng nhập lại.");
+            }
+        }
+        while (!isValid);
+
+        return result;
+    }
+
+    // Hàm tính tổng bình phương các số từ 1 đến n
+    static long TinhTongBinhPhuong(ushort n)
+    {
+        long sum = 0;
+        for (ushort i = 1; i <= n; i++)
+        {
+            sum += (long)i * i;
+        }
+        return sum;
+    }
+}
+    
