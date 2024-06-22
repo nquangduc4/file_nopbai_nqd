@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+
+class MyStack<T>
+{
+    private List<T> stack = new List<T>();
+
+    // Phương thức để thêm một phần tử vào ngăn xếp
+    public void Push(T item)
+    {
+        stack.Add(item);
+    }
+
+    // Phương thức để loại bỏ và trả về phần tử trên cùng của ngăn xếp
+    public T Pop()
+    {
+        if (stack.Count == 0)
+        {
+            throw new InvalidOperationException("Ngan xep rong. Khong the pop.");
+        }
+
+        int lastIndex = stack.Count - 1;
+        T item = stack[lastIndex];
+        stack.RemoveAt(lastIndex);
+        return item;
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Kiểm tra lớp MyStack với kiểu dữ liệu khác nhau
+
+        // MyStack<int>
+        MyStack<int> intStack = new MyStack<int>();
+        intStack.Push(1);
+        intStack.Push(2);
+        intStack.Push(3);
+
+        Console.WriteLine("Pop from intStack: " + intStack.Pop()); // Pop 3
+        Console.WriteLine("Pop from intStack: " + intStack.Pop()); // Pop 2
+        Console.WriteLine("Pop from intStack: " + intStack.Pop()); // Pop 1
+
+        // MyStack<string>
+        MyStack<string> stringStack = new MyStack<string>();
+        stringStack.Push("one");
+        stringStack.Push("two");
+        stringStack.Push("three");
+
+        Console.WriteLine("Pop from stringStack: " + stringStack.Pop()); // Pop "three"
+        Console.WriteLine("Pop from stringStack: " + stringStack.Pop()); // Pop "two"
+        Console.WriteLine("Pop from stringStack: " + stringStack.Pop()); // Pop "one"
+
+        // Thử pop khi ngăn xếp rỗng
+        try
+        {
+            Console.WriteLine("Pop from intStack: " + intStack.Pop()); // Throw exception
+        }
+        catch (InvalidOperationException e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+}
