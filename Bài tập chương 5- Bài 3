@@ -1,0 +1,115 @@
+using System;
+using System.Collections;
+
+class SanPham
+{
+    public string Ten { get; set; }
+    public string MoTa { get; set; }
+    public double Gia { get; set; }
+
+    public SanPham(string ten, string moTa, double gia)
+    {
+        Ten = ten;
+        MoTa = moTa;
+        Gia = gia;
+    }
+
+    public override string ToString()
+    {
+        return $"Ten: {Ten}, Mo ta: {MoTa}, Gia: {Gia}";
+    }
+}
+
+class Program
+{
+    static ArrayList danhSachSanPham = new ArrayList();
+
+    static void Main(string[] args)
+    {
+        int luaChon;
+        do
+        {
+            Console.WriteLine("Quan ly danh sach san pham");
+            Console.WriteLine("1. Them san pham moi");
+            Console.WriteLine("2. Hien thi danh sach san pham");
+            Console.WriteLine("3. Tim kiem san pham theo ten");
+            Console.WriteLine("4. Thoat");
+            Console.Write("Chon mot lua chon: ");
+            if (!int.TryParse(Console.ReadLine(), out luaChon))
+            {
+                Console.WriteLine("Lua chon khong hop le. Vui long chon lai.");
+                continue;
+            }
+
+            switch (luaChon)
+            {
+                case 1:
+                    ThemSanPham();
+                    break;
+                case 2:
+                    HienThiDanhSachSanPham();
+                    break;
+                case 3:
+                    TimKiemSanPham();
+                    break;
+                case 4:
+                    Console.WriteLine("Thoat chuong trinh.");
+                    break;
+                default:
+                    Console.WriteLine("Lua chon khong hop le. Vui long chon lai.");
+                    break;
+            }
+        } while (luaChon != 4);
+    }
+
+    static void ThemSanPham()
+    {
+        Console.Write("Nhap ten san pham: ");
+        string ten = Console.ReadLine();
+        Console.Write("Nhap mo ta: ");
+        string moTa = Console.ReadLine();
+        Console.Write("Nhap gia: ");
+        if (!double.TryParse(Console.ReadLine(), out double gia))
+        {
+            Console.WriteLine("Gia khong hop le. Vui long nhap lai.");
+            return;
+        }
+
+        SanPham sanPham = new SanPham(ten, moTa, gia);
+        danhSachSanPham.Add(sanPham);
+
+        Console.WriteLine("Da them san pham thanh cong.\n");
+    }
+
+    static void HienThiDanhSachSanPham()
+    {
+        Console.WriteLine("Danh sach san pham:");
+        foreach (SanPham sanPham in danhSachSanPham)
+        {
+            Console.WriteLine(sanPham.ToString());
+        }
+        Console.WriteLine();
+    }
+
+    static void TimKiemSanPham()
+    {
+        Console.Write("Nhap ten san pham de tim kiem: ");
+        string ten = Console.ReadLine();
+        bool timThay = false;
+
+        foreach (SanPham sanPham in danhSachSanPham)
+        {
+            if (sanPham.Ten.Equals(ten, StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine(sanPham.ToString());
+                timThay = true;
+            }
+        }
+
+        if (!timThay)
+        {
+            Console.WriteLine("Khong tim thay san pham nao voi ten nay.\n");
+        }
+        Console.WriteLine();
+    }
+}
