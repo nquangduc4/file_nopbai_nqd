@@ -1,0 +1,84 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static Dictionary<string, string> tuDien = new Dictionary<string, string>();
+
+    static void Main(string[] args)
+    {
+        // Them mot so tu vao tu dien
+        tuDien.Add("hello", "xin chao");
+        tuDien.Add("goodbye", "tam biet");
+        tuDien.Add("thank you", "cam on");
+        tuDien.Add("yes", "vang");
+        tuDien.Add("no", "khong");
+        tuDien.Add("computer", "may tinh");
+        tuDien.Add("program", "chuong trinh");
+
+        int luaChon;
+        do
+        {
+            Console.WriteLine("Tu dien Anh - Viet");
+            Console.WriteLine("1. Tra tu");
+            Console.WriteLine("2. Them tu moi");
+            Console.WriteLine("3. Thoat");
+            Console.Write("Chon mot lua chon: ");
+            if (!int.TryParse(Console.ReadLine(), out luaChon))
+            {
+                Console.WriteLine("Lua chon khong hop le. Vui long chon lai.");
+                continue;
+            }
+
+            switch (luaChon)
+            {
+                case 1:
+                    TraTu();
+                    break;
+                case 2:
+                    ThemTu();
+                    break;
+                case 3:
+                    Console.WriteLine("Thoat chuong trinh.");
+                    break;
+                default:
+                    Console.WriteLine("Lua chon khong hop le. Vui long chon lai.");
+                    break;
+            }
+        } while (luaChon != 3);
+    }
+
+    static void TraTu()
+    {
+        Console.Write("Nhap tu tieng Anh: ");
+        string tuTiengAnh = Console.ReadLine();
+
+        if (tuDien.ContainsKey(tuTiengAnh))
+        {
+            Console.WriteLine($"Nghia tieng Viet: {tuDien[tuTiengAnh]}");
+        }
+        else
+        {
+            Console.WriteLine("Khong tim thay tu nay trong tu dien.");
+        }
+        Console.WriteLine();
+    }
+
+    static void ThemTu()
+    {
+        Console.Write("Nhap tu tieng Anh: ");
+        string tuTiengAnh = Console.ReadLine();
+        Console.Write("Nhap nghia tieng Viet: ");
+        string nghiaTiengViet = Console.ReadLine();
+
+        if (!tuDien.ContainsKey(tuTiengAnh))
+        {
+            tuDien.Add(tuTiengAnh, nghiaTiengViet);
+            Console.WriteLine("Da them tu moi vao tu dien.\n");
+        }
+        else
+        {
+            Console.WriteLine("Tu nay da co trong tu dien.\n");
+        }
+    }
+}
