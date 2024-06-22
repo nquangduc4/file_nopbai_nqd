@@ -1,0 +1,53 @@
+using System;
+using System.Collections;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Tạo một Hashtable
+        Hashtable tuDien = new Hashtable();
+
+        // Thêm các cặp key-value vào Hashtable
+        tuDien.Add("tao", 50);         // Key là string, Value là int
+        tuDien.Add(1, "chuoi");        // Key là int, Value là string
+        tuDien.Add("cam", true);       // Key là string, Value là bool
+        tuDien.Add(3.14, "banh");      // Key là double, Value là string
+
+        // Kiểm tra xem một key có tồn tại trong Hashtable hay không
+        object keyCanKiemTra = "tao";
+        if (tuDien.ContainsKey(keyCanKiemTra))
+        {
+            Console.WriteLine($"Key '{keyCanKiemTra}' tồn tại trong Hashtable.");
+        }
+        else
+        {
+            Console.WriteLine($"Key '{keyCanKiemTra}' không tồn tại trong Hashtable.");
+        }
+
+        // Kiểm tra xem một giá trị có tồn tại trong Hashtable hay không
+        object giaTriCanKiemTra = true;
+        if (tuDien.ContainsValue(giaTriCanKiemTra))
+        {
+            Console.WriteLine($"Giá trị '{giaTriCanKiemTra}' tồn tại trong Hashtable.");
+        }
+        else
+        {
+            Console.WriteLine($"Giá trị '{giaTriCanKiemTra}' không tồn tại trong Hashtable.");
+        }
+
+        // Truy xuất giá trị được liên kết với một khóa nhất định
+        object khoaCanTruyXuat = "cam";
+        if (tuDien.ContainsKey(khoaCanTruyXuat))
+        {
+            Console.WriteLine($"Giá trị của key '{khoaCanTruyXuat}' là '{tuDien[khoaCanTruyXuat]}'");
+        }
+
+        // Lặp lại các key và giá trị trong Hashtable
+        Console.WriteLine("\nCác cặp key-value trong Hashtable:");
+        foreach (DictionaryEntry entry in tuDien)
+        {
+            Console.WriteLine($"Key: {entry.Key}, Value: {entry.Value}");
+        }
+    }
+}
