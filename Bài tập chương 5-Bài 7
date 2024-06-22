@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Tạo một Dictionary<TKey, TValue>
+        Dictionary<string, object> tuDien = new Dictionary<string, object>();
+
+        // Thêm các cặp key-value vào Dictionary
+        tuDien.Add("ten", "Nguyen Van A");         // Key là string, Value là string
+        tuDien.Add("tuoi", 25);                    // Key là string, Value là int
+        tuDien.Add("gioi tinh", 'N');              // Key là string, Value là char
+        tuDien.Add("diem", 8.5);                   // Key là string, Value là double
+
+        // Kiểm tra xem một key có tồn tại trong Dictionary hay không
+        string keyCanKiemTra = "ten";
+        if (tuDien.ContainsKey(keyCanKiemTra))
+        {
+            Console.WriteLine($"Key '{keyCanKiemTra}' tồn tại trong Dictionary.");
+        }
+        else
+        {
+            Console.WriteLine($"Key '{keyCanKiemTra}' không tồn tại trong Dictionary.");
+        }
+
+        // Truy xuất giá trị được liên kết với một key nhất định một cách an toàn
+        string keyCanTruyXuat = "tuoi";
+        if (tuDien.TryGetValue(keyCanTruyXuat, out object giaTri))
+        {
+            Console.WriteLine($"Giá trị của key '{keyCanTruyXuat}' là '{giaTri}'");
+        }
+        else
+        {
+            Console.WriteLine($"Không thể truy xuất giá trị của key '{keyCanTruyXuat}'.");
+        }
+
+        // Lặp lại các mục KeyValuePair trong Dictionary và in chúng
+        Console.WriteLine("\nCác cặp key-value trong Dictionary:");
+        foreach (var entry in tuDien)
+        {
+            Console.WriteLine($"Key: {entry.Key}, Value: {entry.Value}");
+        }
+    }
+}
