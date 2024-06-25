@@ -1,0 +1,215 @@
+using System;
+using System.Collections.Generic;
+
+// Abstract class Person
+public abstract class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Gender { get; set; }
+    protected string BankAccount { get; set; }
+
+    public Person(string name, int age, string gender)
+    {
+        Name = name;
+        Age = age;
+        Gender = gender;
+    }
+
+    public abstract string GetRole();
+}
+
+// Interface KPIEvaluator
+public interface KPIEvaluator
+{
+    double CalculateKPI();
+}
+
+// Class TeachingAssistant
+public class TeachingAssistant : Person, KPIEvaluator
+{
+    public string EmployeeID { get; set; }
+    private int NumberOfCourses { get; set; }
+
+    public TeachingAssistant(string name, int age, string gender, string employeeID, int numberOfCourses)
+        : base(name, age, gender)
+    {
+        EmployeeID = employeeID;
+        NumberOfCourses = numberOfCourses;
+    }
+
+    public override string GetRole()
+    {
+        return "Teaching Assistant";
+    }
+
+    public double CalculateKPI()
+    {
+        return NumberOfCourses * 5.0;
+    }
+}
+
+// Class Lecturer
+public class Lecturer : Person, KPIEvaluator
+{
+    public string EmployeeID { get; set; }
+    private int NumberOfPublications { get; set; }
+
+    public Lecturer(string name, int age, string gender, string employeeID, int numberOfPublications)
+        : base(name, age, gender)
+    {
+        EmployeeID = employeeID;
+        NumberOfPublications = numberOfPublications;
+    }
+
+    public override string GetRole()
+    {
+        return "Lecturer";
+    }
+
+    public double CalculateKPI()
+    {
+        return NumberOfPublications * 7.0;
+    }
+}
+
+// Class Professor
+public sealed class Professor : Lecturer
+{
+    public static int CountProfessors { get; private set; } = 0;
+    private int NumberOfProjects { get; set; }
+
+    public Professor(string name, int age, string gender, string employeeID, int numberOfPublications, int numberOfProjects)
+        : base(name, age, gender, employeeID, numberOfPublications)
+    {
+        NumberOfProjects = numberOfProjects;
+        CountProfessors++;
+    }
+
+    public override string GetRole()
+    {
+        return "Professor";
+    }
+
+    public double CalculateKPI()
+    {
+        return base.CalculateKPI() + NumberOfProjects * 10.0;
+    }
+}
+
+// Main Program
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Creating instances
+        var ta1 = new TeachingAssistant("Alice", 28, "Female", "TA001", 3);
+        var lec1 = new Lecturer("Bob", 40, "Male", "L001", 5);
+        var prof1 = new Professor("Charlie", 50, "Male", "P001", 10, 2);
+
+        // Display role and KPI
+        DisplayRoleAndKPI(ta1);
+        DisplayRoleAndKPI(lec1);
+        DisplayRoleAndKPI(prof1);
+
+        // Handling array of objects
+        int n;
+        do
+        {
+            Console.Write("Enter the number of objects (2 to 10): ");
+        } while (!int.TryParse(Console.ReadLine(), out n) || n < 2 || n > 10);
+
+        List<Person> people = new List<Person>();
+
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write("Enter the type of object (ta, lec, gs): ");
+            string type = Console.ReadLine().ToLower();
+            switch (type)
+            {
+                case "ta":
+                    people.Add(CreateTeachingAssistant());
+                    break;
+                case "lec":
+                    people.Add(CreateLecturer());
+                    break;
+                case "gs":
+                    people.Add(CreateProfessor());
+                    break;
+                default:
+                    Console.WriteLine("Invalid type, please enter again.");
+                    i--;
+                    break;
+            }
+        }
+
+        // Display array of objects
+        DisplayPeople(people);
+
+        // Display number of Professors
+        Console.WriteLine($"Number of Professors: {Professor.CountProfessors}");
+    }
+
+    static void DisplayRoleAndKPI(Person person)
+    {
+        Console.WriteLine($"Role: {person.GetRole()}, KPI: {(person as KPIEvaluator)?.CalculateKPI()}");
+    }
+
+    static TeachingAssistant CreateTeachingAssistant()
+    {
+        Console.Write("Enter name: ");
+        string name = Console.ReadLine();
+        Console.Write("Enter age: ");
+        int age = int.Parse(Console.ReadLine());
+        Console.Write("Enter gender: ");
+        string gender = Console.ReadLine();
+        Console.Write("Enter employee ID: ");
+        string employeeID = Console.ReadLine();
+        Console.Write("Enter number of courses: ");
+        int numberOfCourses = int.Parse(Console.ReadLine());
+
+        return new TeachingAssistant(name, age, gender, employeeID, numberOfCourses);
+    }
+
+    static Lecturer CreateLecturer()
+    {
+        Console.Write("Enter name: ");
+        string name = Console.ReadLine();
+        Console.Write("Enter age: ");
+        int age = int.Parse(Console.ReadLine());
+        Console.Write("Enter gender: ");
+        string gender = Console.ReadLine();
+        Console.Write("Enter employee ID: ");
+        string employeeID = Console.ReadLine();
+        Console.Write("Enter number of publications: ");
+        int numberOfPublications = int.Parse(Console.ReadLine());
+
+        return new Lecturer(name, age, gender, employeeID, numberOfPublications);
+    }
+
+    static Professor CreateProfessor()
+    {
+        Console.Write("Enter name: ");
+        string name = Console.ReadLine();
+        Console.Write("Enter age: ");
+        int age = int.Parse(Console.ReadLine());
+        Console.Write("Enter gender: ");
+        string gender = Console.ReadLine();
+        Console.Write("Enter employee ID: ");
+        string employeeID = Console.ReadLine();
+        Console.Write("Enter number of publications: ");
+        int numberOfPublications = int.Parse(Console.ReadLine());
+        Console.Write("Enter number of projects: ");
+        int numberOfProjects = int.Parse(Console.ReadLine());
+
+        return new Professor(name, age, gender, employeeID, numberOfPublications, numberOfProjects);
+    }
+
+    static void DisplayPeople(List<Person> people)
+    {
+        foreach (var person in people)
+        {
+            DisplayRoleAndKPI(person);
+        }
+    }
+}
