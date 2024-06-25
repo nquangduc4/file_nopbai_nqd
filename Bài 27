@@ -1,0 +1,102 @@
+using System;
+
+// Abstract class Person
+public abstract class Person
+{
+    // Properties
+    public string Name { get; set; }
+    public int Age { get; set; }
+
+    // Constructor
+    public Person(string name, int age)
+    {
+        Name = name;
+        Age = age;
+    }
+
+    // Abstract method
+    public abstract override string ToString();
+}
+
+// Interface KPI
+public interface KPI
+{
+    double CalculateKPI();
+}
+
+// Class Student inheriting from Person and implementing KPI
+public class Student : Person, KPI
+{
+    // Additional properties
+    public string Major { get; set; }
+    public float GPA { get; set; }
+
+    // Constructor
+    public Student(string name, int age, string major, float gpa)
+        : base(name, age)
+    {
+        Major = major;
+        GPA = gpa;
+    }
+
+    // Overriding ToString method
+    public override string ToString()
+    {
+        return $"Name: {Name}, Age: {Age}, Major: {Major}, GPA: {GPA}";
+    }
+
+    // Implementing CalculateKPI method
+    public double CalculateKPI()
+    {
+        return GPA;
+    }
+}
+
+// Class Teacher inheriting from Person and implementing KPI
+public class Teacher : Person, KPI
+{
+    // Additional properties
+    public string Major { get; set; }
+    public int Publications { get; set; }
+
+    // Constructor
+    public Teacher(string name, int age, string major, int publications)
+        : base(name, age)
+    {
+        Major = major;
+        Publications = publications;
+    }
+
+    // Overriding ToString method
+    public override string ToString()
+    {
+        return $"Name: {Name}, Age: {Age}, Major: {Major}, Publications: {Publications}";
+    }
+
+    // Implementing CalculateKPI method
+    public double CalculateKPI()
+    {
+        return 1.5 * Publications;
+    }
+}
+
+// Main Program class
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Creating a Student object
+        Student student = new Student("Nguyen Tien Dung", 20, "CNTT&TT", 3.8f);
+
+        // Creating a Teacher object
+        Teacher teacher = new Teacher("Vu Duc Viet", 38, "CNTT&TT", 5);
+
+        // Displaying the Student object using ToString method and CalculateKPI
+        Console.WriteLine(student.ToString());
+        Console.WriteLine($"Student KPI: {student.CalculateKPI()}");
+
+        // Displaying the Teacher object using ToString method and CalculateKPI
+        Console.WriteLine(teacher.ToString());
+        Console.WriteLine($"Teacher KPI: {teacher.CalculateKPI()}");
+    }
+}
