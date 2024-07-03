@@ -1,0 +1,75 @@
+using System;
+using System.IO;
+
+class Program
+{
+    // Khai báo biến chuỗi không đổi FilePath
+    const string FilePath = "data.txt";
+
+    static void Main(string[] args)
+    {
+        // Gọi phương thức CreateFile
+        CreateFile(FilePath);
+
+        // Gọi phương thức WriteToFile với nội dung mẫu
+        WriteToFile(FilePath, "Đây là nội dung mẫu đầu tiên.\n");
+
+        // Gọi phương thức ReadFromFile để xác minh tệp đã được ghi chính xác
+        ReadFromFile(FilePath);
+
+        // Gọi phương thức AppendToFile với nội dung mẫu khác
+        AppendToFile(FilePath, "Đây là nội dung mẫu thứ hai.\n");
+
+        // Gọi lại phương thức ReadFromFile để xem nội dung cập nhật
+        ReadFromFile(FilePath);
+
+        // Gọi phương thức DeleteFile để xóa tệp
+        DeleteFile(FilePath);
+
+        // Xác minh rằng tệp đã bị xóa
+        if (!File.Exists(FilePath))
+        {
+            Console.WriteLine("Tệp đã bị xóa thành công.");
+        }
+    }
+
+    // Phương thức CreateFile
+    static void CreateFile(string filePath)
+    {
+        // Tạo tệp mới tại filePath được chỉ định
+        using (FileStream fs = File.Create(filePath))
+        {
+            // Tạo tệp mà không ghi dữ liệu vào
+        }
+    }
+
+    // Phương thức WriteToFile
+    static void WriteToFile(string filePath, string content)
+    {
+        // Ghi nội dung vào tệp tại filePath được chỉ định
+        File.WriteAllText(filePath, content);
+    }
+
+    // Phương thức ReadFromFile
+    static void ReadFromFile(string filePath)
+    {
+        // Đọc nội dung của tệp tại filePath được chỉ định
+        string content = File.ReadAllText(filePath);
+        Console.WriteLine("Nội dung của tệp:");
+        Console.WriteLine(content);
+    }
+
+    // Phương thức AppendToFile
+    static void AppendToFile(string filePath, string content)
+    {
+        // Nối nội dung vào tệp tại filePath được chỉ định
+        File.AppendAllText(filePath, content);
+    }
+
+    // Phương thức DeleteFile
+    static void DeleteFile(string filePath)
+    {
+        // Xóa tệp tại filePath được chỉ định
+        File.Delete(filePath);
+    }
+}
