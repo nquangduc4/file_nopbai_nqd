@@ -1,0 +1,30 @@
+using System;
+
+namespace ex4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int m = EditNumbers.nhapsonguyenduong();
+            int n = EditNumbers.nhapsonguyenduong();
+            float x = EditNumbers.nhapsothuc4byte();
+
+            Console.WriteLine("m: " + m.ToString());
+            Console.WriteLine("n: " + n.ToString());
+            Console.WriteLine("x: " + x.ToString());
+
+            float[,] arrayA = array_float_2d.nhapmangfloat2d(m, n);
+            Console.WriteLine("Mảng A:");
+            array_float_2d.hienthimangfloat2d(arrayA);
+
+            string filename = "a2d.csv";
+            array_float_2d.ghimang2dfloat_file_csv(arrayA, filename);
+            Console.WriteLine($"Mảng A đã được ghi ra file {filename}");
+
+            float[,] arrayB = array_float_2d.docmang2dfloat_file_csv(filename);
+            Console.WriteLine("Mảng B đọc từ file:");
+            array_float_2d.hienthimangfloat2d(arrayB);
+        }
+    }
+}
