@@ -1,0 +1,60 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+
+// Định nghĩa lớp Product
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public double Price { get; set; }
+    public string Category { get; set; }
+}
+
+// Lớp JSONHelper chứa các phương thức để đọc và ghi tệp JSON
+public class JSONHelper
+{
+    // Phương thức để đọc dữ liệu từ tệp JSON và chuyển đổi thành danh sách các đối tượng Product
+    public static List<Product> ReadProductsFromJson(string filePath)
+    {
+        string jsonString = File.ReadAllText(filePath);
+        return JsonSerializer.Deserialize<List<Product>>(jsonString);
+    }
+
+    // Phương thức để ghi danh sách các đối tượng Product vào tệp JSON
+    public static void WriteProductsToJson(string filePath, List<Product> products)
+    {
+        string jsonString = JsonSerializer.Serialize(products, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(filePath, jsonString);
+    }
+}
+
+// Lớp Program chứa phương thức Main
+class Program
+{
+    const string JsonFilePath = "products.json";
+
+    static void Main(string[] args)
+    {
+        // Tạo danh sách các đối tượng Product
+        List<Product> products = new List<Product>
+        {
+            new Product { Id = 1, Name = "Laptop", Price = 1200.99, Category = "Electronics" },
+            new Product { Id = 2, Name = "Phone", Price = 799.49, Category = "Electronics" },
+            new Product { Id = 3, Name = "Desk", Price = 199.99, Category = "Furniture" }
+        };
+
+        // Ghi danh sách các đối tượng Product vào tệp JSON
+        JSONHelper.WriteProductsToJson(JsonFilePath, products);
+
+        // Đọc dữ liệu từ tệp JSON và chuyển đổi thành danh sách các đối tượng Product
+        List<Product> productsFromFile = JSONHelper.ReadProductsFromJson(JsonFilePath);
+
+        // Hiển thị danh sách các đối tượng Product đã đọc từ tệp JSON
+        foreach (Product product in productsFromFile)
+        {
+            Console.WriteLine($"Id: {product.Id}, Name: {product.Name}, Price: {product.Price}, Category: {product.Category}");
+        }
+    }
+}
