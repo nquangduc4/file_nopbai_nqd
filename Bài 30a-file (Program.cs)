@@ -1,0 +1,18 @@
+using System;
+
+namespace ex4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int m = EditNumbers.nhapsonguyenduong();
+            int n = EditNumbers.nhapsonguyenduong();
+            float x = EditNumbers.nhapsothuc4byte();
+
+            Console.WriteLine("m: " + m.ToString());
+            Console.WriteLine("n: " + n.ToString());
+            Console.WriteLine("x: " + x.ToString());
+        }
+    }
+}
