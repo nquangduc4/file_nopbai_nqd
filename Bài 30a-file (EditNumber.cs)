@@ -1,0 +1,52 @@
+using System;
+
+namespace ex4
+{
+    public static class EditNumbers
+    {
+        public static int nhapsonguyenduong()
+        {
+            int n = 0;
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Nhập số nguyên dương: ");
+                    n = int.Parse(Console.ReadLine());
+                    if (n > 0)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Vui lòng nhập số nguyên dương lớn hơn 0.");
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Vui lòng nhập một số nguyên hợp lệ.");
+                }
+            }
+            return n;
+        }
+
+        public static float nhapsothuc4byte()
+        {
+            float f = 0;
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Nhập số thực 4 byte: ");
+                    f = float.Parse(Console.ReadLine());
+                    break;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Vui lòng nhập một số thực hợp lệ.");
+                }
+            }
+            return f;
+        }
+    }
+}
