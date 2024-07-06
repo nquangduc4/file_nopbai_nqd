@@ -1,0 +1,118 @@
+Lớp trừu tượng Shape
+Đầu tiên, bạn sẽ định nghĩa lớp trừu tượng Shape với thuộc tính so_dinh cần có validation là số đỉnh phải lớn hơn 0.
+
+
+
+
+
+
+public abstract class Shape
+{
+    private int _so_dinh;
+
+    public int so_dinh
+    {
+        get { return _so_dinh; }
+        set
+        {
+            if (value > 0)
+                _so_dinh = value;
+            else
+                throw new ArgumentException("Số đỉnh phải lớn hơn 0.");
+        }
+    }
+
+    // Constructor để khởi tạo số đỉnh
+    protected Shape(int so_dinh)
+    {
+        this.so_dinh = so_dinh;
+    }
+
+    // Phương thức trừu tượng để tính diện tích, sẽ được triển khai ở lớp con
+    public abstract double TinhDienTich();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lớp Tam_giac kế thừa từ Shape
+Tiếp theo, bạn sẽ tạo lớp Tam_giac kế thừa từ lớp Shape, và đặc biệt là nó có 3 đỉnh.
+
+
+
+
+
+
+
+public class Tam_giac : Shape
+{
+    public Tam_giac() : base(3) // Khởi tạo với 3 đỉnh
+    {
+    }
+
+    public override double TinhDienTich()
+    {
+        // Viết mã tính diện tích của tam giác ở đây
+        // Ví dụ: return dien_tich;
+        return 0.0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+Sử dụng trong chương trình chính (Main)
+Bạn có thể kiểm tra các chức năng của lớp Shape và Tam_giac trong chương trình chính như sau:
+
+
+
+
+
+
+
+
+
+
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        try
+        {
+            Shape shape = new Tam_giac(); // Tạo một đối tượng tam giác
+
+            Console.WriteLine("Số đỉnh của shape: " + shape.so_dinh); // In số đỉnh của shape
+
+            // Thử đặt số đỉnh không hợp lệ (số âm)
+            // shape.so_dinh = -2; // Dòng này sẽ ném ra ArgumentException
+
+            // Thử đặt số đỉnh không hợp lệ (không phải tam giác có 3 đỉnh)
+            // shape.so_dinh = 4; // Dòng này sẽ ném ra ArgumentException
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine("Error: " + ex.Message);
+        }
+    }
+}
