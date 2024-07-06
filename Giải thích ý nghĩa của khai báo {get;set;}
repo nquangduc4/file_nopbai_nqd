@@ -1,0 +1,39 @@
+Trong C#, khai báo { get; set; } được sử dụng để tạo ra các thuộc tính (properties) cho một lớp. Ý nghĩa của từng phần trong { get; set; } như sau:
+
+get: Được sử dụng để lấy giá trị của thuộc tính (getter). Khi bạn truy cập vào thuộc tính này từ bên ngoài lớp, phương thức get sẽ được gọi để trả về giá trị của thuộc tính.
+
+set: Được sử dụng để thiết lập giá trị cho thuộc tính (setter). Khi bạn gán giá trị cho thuộc tính này từ bên ngoài lớp, phương thức set sẽ được gọi để lưu trữ giá trị được gán.
+
+Ví dụ:
+
+
+public class Person
+{
+    private string _name;
+
+    public string Name
+    {
+        get { return _name; }   // Getter để lấy giá trị của _name
+        set { _name = value; }  // Setter để thiết lập giá trị cho _name
+    }
+}
+
+
+
+
+
+
+
+Trong ví dụ trên:
+
+Name là một thuộc tính có khả năng đọc (get) và ghi (set) giá trị.
+Khi bạn gọi person.Name để lấy giá trị của Name, phương thức get sẽ trả về giá trị của _name.
+Khi bạn gán giá trị cho person.Name = "John", phương thức set sẽ được gọi để lưu trữ giá trị "John" vào _name.
+Ý nghĩa và lợi ích của { get; set; }:
+Tính bảo mật và ẩn dữ liệu (Encapsulation): Bằng cách sử dụng { get; set; }, bạn có thể kiểm soát quyền truy cập vào dữ liệu bên trong đối tượng. Ví dụ, bạn có thể thiết lập chỉ có phương thức get cho một thuộc tính, điều này có nghĩa là thuộc tính đó chỉ có thể được đọc và không thể được thay đổi từ bên ngoài lớp.
+
+Dễ dàng trong việc tạo, đọc và gán giá trị: Việc sử dụng { get; set; } giúp đơn giản hóa quá trình tạo các thuộc tính và cung cấp một cách ngắn gọn để truy cập và sửa đổi dữ liệu.
+
+Hỗ trợ validation và logic: Bạn có thể thêm logic và kiểm tra (validation) vào phương thức set để đảm bảo rằng dữ liệu được gán cho thuộc tính là hợp lệ trước khi lưu trữ.
+
+Tối ưu hóa mã: Việc sử dụng { get; set; } giúp giảm thiểu mã nguồn so với việc tạo các phương thức getter và setter riêng lẻ.
