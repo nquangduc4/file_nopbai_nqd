@@ -1,0 +1,36 @@
+Nếu bỏ đi get và set trong khai báo Name:
+
+
+
+public virtual string Name;
+
+
+
+thay vì
+
+
+
+
+
+public virtual string Name { get; set; }
+
+thì sẽ có những vấn đề sau:
+Không kiểm soát truy cập: Thuộc tính Name sẽ trở thành một trường (field) công khai (public) và có thể truy cập trực tiếp từ bên ngoài. Điều này làm mất đi tính bao đóng (encapsulation), không còn kiểm soát được cách truy cập và sửa đổi giá trị của Name.
+
+Không thể override: Khi Name là một trường (field) thông thường, bạn không thể ghi đè (override) nó trong lớp dẫn xuất như Student. Ghi đè chỉ áp dụng cho các thuộc tính (properties) hoặc phương thức (methods).
+
+Mất tính linh hoạt: Việc sử dụng thuộc tính (properties) cho phép bạn thêm logic kiểm tra và xử lý khi lấy (get) và gán (set) giá trị. Khi sử dụng trường (field) công khai, bạn không thể thêm được logic này một cách dễ dàng.
+
+Ví dụ trong Program.cs sẽ không hoạt động nếu Name là một trường (field) thay vì thuộc tính (property) vì không thể gán giá trị như vậy vào một trường:
+
+
+
+
+
+Person obs = new Student();
+obs.Name = "Nguyễn Tiến Dũng"; // Lỗi: Không thể gán giá trị cho một trường
+
+
+
+
+Do đó, để giữ được tính bao đóng và khả năng ghi đè, và để có thể thêm logic kiểm tra khi cài đặt giá trị, nên sử dụng thuộc tính (property) với get và set như đã được định nghĩa trong lớp Person.
