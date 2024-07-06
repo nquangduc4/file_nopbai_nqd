@@ -1,0 +1,22 @@
+Abstract và Virtual cho Phương Thức
+Abstract Method (Phương thức trừu tượng):
+
+Một phương thức trừu tượng không có phần thân (body) và phải được khai báo trong một lớp trừu tượng (abstract class) hoặc giao diện (interface).
+Lớp dẫn xuất từ lớp trừu tượng phải triển khai (override) lại tất cả các phương thức trừu tượng của lớp cơ sở.
+Dùng khi bạn muốn chỉ định các hành động chung nhất định mà các lớp con cần phải thực hiện.
+Virtual Method (Phương thức ảo):
+
+Phương thức ảo có phần thân (body) mặc định nhưng có thể được ghi đè (override) bởi các lớp dẫn xuất.
+Các lớp con có thể hoặc không triển khai lại phương thức này.
+Dùng khi bạn muốn cung cấp một triển khai mặc định cho phương thức, nhưng cho phép lớp con thay đổi hoặc mở rộng hành vi này.
+Abstract và Virtual cho Thuộc Tính
+Abstract Property (Thuộc tính trừu tượng):
+
+Thuộc tính trừu tượng không có phần thân (body) và phải được khai báo trong một lớp trừu tượng.
+Các lớp con phải cung cấp một triển khai (implement) cho thuộc tính này.
+Dùng khi bạn muốn định nghĩa các thuộc tính mà các lớp con phải có.
+Virtual Property (Thuộc tính ảo):
+
+Thuộc tính ảo có thể có phần thân (body) mặc định nhưng có thể được ghi đè (override) bởi các lớp dẫn xuất.
+Các lớp con có thể hoặc không cần phải ghi đè lại thuộc tính này.
+Dùng khi bạn muốn cung cấp một triển khai mặc định cho thuộc tính, nhưng cho phép lớp con thay đổi hoặc mở rộng hành vi này.
