@@ -1,0 +1,26 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        // Khởi tạo một Dictionary mới với key là string và value là int
+        Dictionary<string, int> myDictionary = new Dictionary<string, int>();
+
+        // Thêm các phần tử vào Dictionary
+        // "Apple" là key và 1 là value
+        // "Banana" là key và 2 là value
+        // "Cherry" là key và 3 là value
+        myDictionary.Add("Apple", 1);
+        myDictionary.Add("Banana", 2);
+        myDictionary.Add("Cherry", 3);
+
+        // In ra các phần tử trong Dictionary
+        foreach(KeyValuePair<string, int> kvp in myDictionary)
+        {
+            // In ra key và value của từng phần tử trong Dictionary
+            Console.WriteLine("Key: {0}, Value: {1}", kvp.Key, kvp.Value);
+        }
+    }
+}
