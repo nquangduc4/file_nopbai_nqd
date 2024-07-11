@@ -1,0 +1,21 @@
+Có thể thay thế các lời gọi hàm generic có kiểu rõ ràng bằng lời gọi hàm generic mà không cần chỉ định kiểu, vì trình biên dịch C# có thể suy ra kiểu từ tham số truyền vào.
+ Điều này có thể thay thế:
+
+
+
+min_value = FindMin<int>(intArray);
+
+Bằng
+
+min_value = FindMin(intArray);
+
+
+
+
+
+và 
+min_value = FindMin<double>(doubleArray);
+
+Bằng
+
+min_value = FindMin(doubleArray);
