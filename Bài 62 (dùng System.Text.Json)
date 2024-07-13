@@ -1,0 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+
+public class JsonReader
+{
+    public static Dictionary<string, object> ReadJsonFileToDictionary(string fileName)
+    {
+        string jsonString = File.ReadAllText(fileName);
+        var dictionary = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonString);
+        return dictionary;
+    }
+}
