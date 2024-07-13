@@ -1,0 +1,64 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+public class CsvReader
+{
+    public static double[,] ReadCsvTo2DArray(string fileName, bool hasHeader)
+    {
+        var lines = new List<string[]>();
+
+        using (StreamReader reader = new StreamReader(fileName))
+        {
+            string line;
+            if (hasHeader)
+            {
+                // Bỏ qua dòng header
+                reader.ReadLine();
+            }
+
+            while ((line = reader.ReadLine()) != null)
+            {
+                string[] values = line.Split(',');
+                lines.Add(values);
+            }
+        }
+
+        int rows = lines.Count;
+        int columns = lines[0].Length;
+        double[,] result = new double[rows, columns];
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns; j++)
+            {
+                result[i, j] = double.Parse(lines[i][j]);
+            }
+        }
+
+        return result;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        string fileName = "numbers.csv";
+
+        // Giả sử file CSV có header
+        bool hasHeader = true;
+
+        double[,] data = CsvReader.ReadCsvTo2DArray(fileName, hasHeader);
+
+        // In mảng 2 chiều
+        for (int i = 0; i < data.GetLength(0); i++)
+        {
+            for (int j = 0; j < data.GetLength(1); j++)
+            {
+                Console.Write(data[i, j] + " ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
