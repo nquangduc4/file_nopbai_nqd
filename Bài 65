@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+public class CsvWriter
+{
+    public static void WriteDictionaryToCsv(string fileName, Dictionary<string, double> dictionary)
+    {
+        using (StreamWriter writer = new StreamWriter(fileName))
+        {
+            // Ghi header
+            writer.WriteLine("Key,Value");
+
+            // Duyệt qua các phần tử của dictionary và ghi chúng vào file CSV
+            foreach (var kvp in dictionary)
+            {
+                writer.WriteLine($"{kvp.Key},{kvp.Value}");
+            }
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        var data = new Dictionary<string, double>
+        {
+            { "Item1", 123.45 },
+            { "Item2", 678.90 },
+            { "Item3", 234.56 },
+            { "Item4", 789.01 }
+        };
+
+        string fileName = "dictionary_output.csv";
+        CsvWriter.WriteDictionaryToCsv(fileName, data);
+
+        Console.WriteLine("CSV file has been written.");
+    }
+}
