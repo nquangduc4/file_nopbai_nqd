@@ -1,0 +1,42 @@
+using System;
+using System.IO;
+
+public class CsvWriter
+{
+    public static void Write2DArrayToCsv(string fileName, float[,] array)
+    {
+        using (StreamWriter writer = new StreamWriter(fileName))
+        {
+            int rows = array.GetLength(0);
+            int columns = array.GetLength(1);
+
+            for (int i = 0; i < rows; i++)
+            {
+                string[] rowValues = new string[columns];
+                for (int j = 0; j < columns; j++)
+                {
+                    rowValues[j] = array[i, j].ToString();
+                }
+                writer.WriteLine(string.Join(",", rowValues));
+            }
+        }
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        float[,] data = 
+        {
+            { 1.1f, 2.2f, 3.3f },
+            { 4.4f, 5.5f, 6.6f },
+            { 7.7f, 8.8f, 9.9f }
+        };
+
+        string fileName = "output.csv";
+        CsvWriter.Write2DArrayToCsv(fileName, data);
+
+        Console.WriteLine("CSV file has been written.");
+    }
+}
